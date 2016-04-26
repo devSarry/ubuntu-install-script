@@ -20,12 +20,11 @@ targetDistro=xenial
 if [ "$distro" != "$targetDistro" ]; then
   echo "Wrong Distribution!"
   echo "You are using $distro, this script was made for $targetDistro."
-  echo "Please visit oduso.com"
   exit 1
 fi
 
 echo --------------------------------------------------------------------------------
-echo "We are not responsible for any damages that may possibly occur while using ODUSO"
+echo "We are not responsible for any damages that may possibly occur while using this
 echo --------------------------------------------------------------------------------
 echo "   "
 
@@ -59,6 +58,7 @@ apt-add-repository ppa:apandada1/typhoon -y
 apt-add-repository ppa:apandada1/up-clock -y
 apt-add-repository ppa:synapse-core/testing -y
 apt-add-repository ppa:snwh/pulp -y
+apt-get install tlp tlp-rdw
 ) &> /dev/null && echo -e "$green OK $endcolor" || echo -e "$red FAILED $endcolor"; # Hide all output
 
 echo "Updating System" 
@@ -195,6 +195,14 @@ echo "Installing Paper"
 (
 apt-get install paper-gtk-theme
 ) &> /dev/null && echo -e "$green OK $endcolor" || echo -e "$red FAILED $endcolor"; # Hide all output
+
+
+echo "Installing TLP for better battery life"
+(
+apt-get install tlp tlp-rdw
+tlp start
+) &> /dev/null && echo -e "$green OK $endcolor" || echo -e "$red FAILED $endcolor"; # Hide all output
+
 
 echo "Rebooting in 10 Seconds, CTRL + C to cancel!"
 sleep 10
